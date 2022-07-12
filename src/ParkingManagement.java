@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +11,7 @@ public class ParkingManagement {
     private List<LogBook> logBooks = new ArrayList<>();
 
     public void createCars(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 200; i++) {
             cars.add(new Car(String.valueOf(i+1), StateOfCar.InRoad));
         }
     }
@@ -40,7 +41,7 @@ public class ParkingManagement {
     }
 
     public void loggingOfCars(){
-        for (LocalDateTime i = ldt; i.isBefore(ldt.plusDays(3)); i = i.plusMinutes(15)) {
+        for (LocalDateTime i = ldt; i.isBefore(ldt.plusDays(30)); i = i.plusMinutes(5)) {
             for (int j = 0; j < cars.size(); j++) {
                 int random = new Random().nextInt(100);
                 if (random < 4 && cars.get(j).getStateOfCar().equals(StateOfCar.InRoad)){
@@ -78,7 +79,6 @@ public class ParkingManagement {
                 }
             }
         }
-
         logBooks.removeIf(LogBook::isDurationLess);
         logBooks.removeIf(LogBook::isParkingFree);
         logBooks.sort(LogBook::byIdNumber);

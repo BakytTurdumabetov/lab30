@@ -1,7 +1,6 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 
 public class LogBook {
     private String idNumber;
@@ -39,14 +38,19 @@ public class LogBook {
         return e1.idNumber.compareTo(e2.idNumber);
     }
 
-//    public boolean isParkingFree(){
-//        if (endParking == null){
-//            return false;
-//        }
-//        else {
-//            return startParking.isAfter(LocalTime.of(9, 1)) && endParking.isAfter(ChronoLocalDateTime.from(LocalTime.of(21, 1)));
-//        }
-//    }
+    public boolean isParkingFree(){
+        boolean answer = false;
+        if (endParking == null){
+            answer = false;
+        }
+        else {
+            if (startParking.toLocalTime().isBefore(LocalTime.of(9, 1)) || startParking.toLocalTime().isAfter(LocalTime.of(21,1))
+            || endParking.toLocalTime().isBefore(LocalTime.of(9, 1)) || endParking.toLocalTime().isAfter(LocalTime.of(21,1))){
+                answer = true;
+            }
+        }
+        return answer;
+    }
 
     public String getIdNumber() {
         return idNumber;
